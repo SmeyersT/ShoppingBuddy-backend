@@ -5,4 +5,5 @@ import tom.smeyers.shoppingbuddybackend.model.domain.User
 
 @Repository
 interface UserRepository : JpaRepository<User, Long> {
+    fun findByEmail(email: String): User?
 }

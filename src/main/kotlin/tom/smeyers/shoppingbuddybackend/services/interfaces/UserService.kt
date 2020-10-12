@@ -6,5 +6,7 @@ import tom.smeyers.shoppingbuddybackend.model.domain.User
 @Service
 interface UserService {
     fun save(user: User): User
-    fun findUserById(id: Long): User
+    fun getUserById(id: Long): User
+    fun getByEmail(email: String): User
+    fun getCurrentUser(token: String): User
 }

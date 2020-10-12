@@ -7,7 +7,7 @@ import tom.smeyers.shoppingbuddybackend.model.domain.User
 @Service
 interface GroupService {
     fun save(group: Group): Group
-    fun deleteGroup(group: Group): Group
+    fun deleteGroup(group: Group, user: User)
     fun createGroup(group: Group): Group
     fun findGroupById(id: Long): Group
     fun getAllGroups(): MutableList<Group>

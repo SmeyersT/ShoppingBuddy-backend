@@ -1,5 +1,6 @@
 package tom.smeyers.shoppingbuddybackend.services.implementations
 
+import javassist.NotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import tom.smeyers.shoppingbuddybackend.model.domain.Group
@@ -33,6 +34,15 @@ class GroupMemberServiceImpl : GroupMemberService {
 
     override fun getGroupMembersByGroup(group: Group): MutableList<GroupMember> {
         return groupMemberRepo.findAllByGroup_Id(group.id)
+    }
+
+    @Throws(NotFoundException::class)
+    override fun getGroupMemberByUserAndGroup(groupId: Long, userId: Long): GroupMember {
+        val groupMember = groupMemberRepo.findByUserAndGroup(userId, groupId)
+        return if(groupMember.isPresent) {
+            groupMember.get()
+        }
+        else throw NotFoundException("No groupMember found for user: $userId in group: $groupId.")
     }
 
     override fun deleteGroupMember(id: Long): GroupMember {

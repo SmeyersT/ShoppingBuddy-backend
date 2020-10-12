@@ -11,7 +11,7 @@ data class Group(
         @GeneratedValue
         var id: Long = 0,
         var name: String,
-        var description: String,
+        var imgUrl: String,
         @OneToMany(mappedBy = "group", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
         @JsonManagedReference
         var groupMembers: MutableList<GroupMember> = mutableListOf<GroupMember>(),

@@ -22,15 +22,20 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation ("io.jsonwebtoken:jjwt-impl:0.11.0")
+	implementation ("io.jsonwebtoken:jjwt-api:0.11.0")
+	implementation ("io.jsonwebtoken:jjwt-jackson:0.11.0")
+	implementation ("com.google.api-client:google-api-client:1.30.9")
 	//implementation ("org.springframework.security.oauth:spring-security-oauth2:2.4.1.RELEASE")
 	//implementation("org.flywaydb:flyway-core:6.5.0")
 	runtimeOnly("com.h2database:h2")
-	runtimeOnly("org.postgresql:postgresql:42.2.12")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.11.2")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.2")
+	testImplementation("org.springframework.security:spring-security-test")
 }
 
 tasks.withType<Test> {

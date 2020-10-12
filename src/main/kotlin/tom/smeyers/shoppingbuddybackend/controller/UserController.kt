@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import tom.smeyers.shoppingbuddybackend.model.dto.UserDTO
@@ -25,10 +26,10 @@ class UserController {
     private lateinit var userService: UserService
 
     @GetMapping("/getCurrentUser")
-    fun getCurrentUser() : ResponseEntity<UserDTO> {
+    fun getCurrentUser(@RequestHeader("Authorization") authHeader: String) : ResponseEntity<UserDTO> {
         logger.info("getCurrentUser method called.")
-        val currentUser = userService.findUserById(5000)
-        val currentUserDTO = objectMapper.convertValue(currentUser, UserDTO::class.java)
+        val user = userService.getCurrentUser(authHeader.substring(7))
+        val currentUserDTO = objectMapper.convertValue(user, UserDTO::class.java)
         return ResponseEntity.ok(currentUserDTO)
     }
 

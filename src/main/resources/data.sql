@@ -11,7 +11,7 @@ INSERT INTO USERS
 VALUES (5001, NOW(), 'Elon@Musk.com', 'Elon', 'https://upload.wikimedia.org/wikipedia/commons/e/ed/Elon_Musk_Royal_Society.jpg', 'Musk', 5001);
 
 INSERT INTO GROUPS
-VALUES (5000, 'The man at SpaceX', 'SpaceX', 5002);
+VALUES (5000, 'https://1000logos.net/wp-content/uploads/2020/09/SpaceX-Logo-500x313.png', 'SpaceX', 5002);
 
 INSERT INTO GROUP_MEMBER
 VALUES (5000, 0, 5000, 5001);

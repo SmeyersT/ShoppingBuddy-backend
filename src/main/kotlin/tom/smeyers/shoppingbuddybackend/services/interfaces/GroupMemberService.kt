@@ -10,5 +10,6 @@ interface GroupMemberService {
     fun save(groupMember: GroupMember): GroupMember
     fun getGroupMembersByUser(user: User): MutableList<GroupMember>
     fun getGroupMembersByGroup(group: Group): MutableList<GroupMember>
+    fun getGroupMemberByUserAndGroup(groupId: Long, userId: Long): GroupMember
     fun deleteGroupMember(id: Long): GroupMember
 }
