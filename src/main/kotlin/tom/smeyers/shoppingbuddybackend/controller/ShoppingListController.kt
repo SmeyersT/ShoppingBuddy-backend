@@ -6,6 +6,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
+import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.web.bind.annotation.*
 import tom.smeyers.shoppingbuddybackend.model.domain.ShoppingCart
 import tom.smeyers.shoppingbuddybackend.model.domain.ShoppingCartItem
@@ -29,6 +30,9 @@ class ShoppingListController {
     @Autowired
     private lateinit var shoppingCartItemService: ShoppingCartItemService
 
+    @Autowired
+    private lateinit var simpMessagingTemplate: SimpMessagingTemplate
+
     @PostMapping("/updateShoppingCart")
     fun updateShoppingCart(@RequestBody shoppingCartDTO: ShoppingCartDTO): ResponseEntity<ShoppingCartDTO> {
         logger.info("updateShoppingCart method called.")
@@ -45,7 +49,9 @@ class ShoppingListController {
             val item = objectMapper.convertValue(shoppingCartAndItemWrapper.shoppingCartItem, ShoppingCartItem::class.java)
 
             val shoppingCart = shoppingCartService.addItemToCart(cart, item)
-            ResponseEntity.ok(objectMapper.convertValue(shoppingCart, ShoppingCartDTO::class.java))
+            val shoppingCartDTO = objectMapper.convertValue(shoppingCart, ShoppingCartDTO::class.java)
+            if(!shoppingCartDTO.isPersonalCart) simpMessagingTemplate.convertAndSend("/topic/shoppingLists/${shoppingCartDTO.id}", objectMapper.writeValueAsString(shoppingCartDTO))
+            ResponseEntity.ok(shoppingCartDTO)
         } catch (ex: NotFoundException) {
             ResponseEntity.badRequest().build<ShoppingCartDTO>()
         }

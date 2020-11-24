@@ -9,4 +9,5 @@ interface ShoppingCartService {
     fun getById(id: Long): ShoppingCart
     fun addItemToCart(shoppingCart: ShoppingCart, item: ShoppingCartItem): ShoppingCart
     fun removeItemFromCart(shoppingcart: ShoppingCart, item: ShoppingCartItem): ShoppingCart
+    fun updateCartItem(shoppingcart: ShoppingCart, item: ShoppingCartItem): ShoppingCart
 }

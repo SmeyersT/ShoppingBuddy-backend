@@ -1,9 +1,9 @@
 INSERT INTO SHOPPING_CART
-VALUES (5000, NOW(), TRUE, FALSE);
+VALUES (5000, TRUE, FALSE);
 INSERT INTO SHOPPING_CART
-VALUES (5001, NOW(), TRUE, FALSE);
+VALUES (5001, TRUE, FALSE);
 INSERT INTO SHOPPING_CART
-VALUES (5002, NOW(), FALSE, FALSE);
+VALUES (5002, FALSE, FALSE);
 
 INSERT INTO USERS
 VALUES (5000, NOW(), 'Tom@Test.com', 'Tom', 'https://vignette.wikia.nocookie.net/westworld/images/5/56/Robert_Ford.jpg/revision/latest/scale-to-width-down/1000?cb=20180619173041&path-prefix=nl', 'Test', 5000);
