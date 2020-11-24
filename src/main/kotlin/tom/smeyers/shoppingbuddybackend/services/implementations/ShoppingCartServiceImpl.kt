@@ -50,5 +50,9 @@ class ShoppingCartServiceImpl : ShoppingCartService {
         return save(shoppingcart)
     }
 
-
+    override fun updateCartItem(shoppingcart: ShoppingCart, item: ShoppingCartItem): ShoppingCart {
+        val itemIndex = shoppingcart.items.find { it.id == item.id }
+        shoppingcart.items[shoppingcart.items.indexOf(itemIndex)] = item
+        return save(shoppingcart)
+    }
 }

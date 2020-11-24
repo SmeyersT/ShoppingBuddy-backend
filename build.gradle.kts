@@ -27,6 +27,13 @@ dependencies {
 	implementation ("io.jsonwebtoken:jjwt-api:0.11.0")
 	implementation ("io.jsonwebtoken:jjwt-jackson:0.11.0")
 	implementation ("com.google.api-client:google-api-client:1.30.9")
+	implementation ("org.springframework.boot:spring-boot-starter-websocket")
+	implementation ("org.webjars:webjars-locator-core")
+	implementation ("org.webjars:sockjs-client:1.0.2")
+	implementation ("org.webjars:stomp-websocket:2.3.3")
+	implementation ("org.webjars:bootstrap:3.3.7")
+	implementation ("org.webjars:jquery:3.1.1-1")
+	implementation ("org.postgresql:postgresql:42.2.18")
 	//implementation ("org.springframework.security.oauth:spring-security-oauth2:2.4.1.RELEASE")
 	//implementation("org.flywaydb:flyway-core:6.5.0")
 	runtimeOnly("com.h2database:h2")
@@ -35,6 +42,7 @@ dependencies {
 	}
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.11.2")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.2")
+	implementation ("com.fasterxml.jackson.datatype:jackson-datatype-joda:2.11.3")
 	testImplementation("org.springframework.security:spring-security-test")
 }
 

@@ -12,7 +12,7 @@ interface GroupMemberRepository : JpaRepository<GroupMember, Long> {
     fun findAllByUser_Id(user_id: Long): MutableList<GroupMember>
     fun findAllByGroup_Id(group_id: Long): MutableList<GroupMember>
     @Query(
-            value = "SELECT * FROM GROUP_MEMBER WHERE GROUP_ID = :group_id AND USER_ID = :user_id",
+            value = "SELECT * FROM shoppingbuddy.GROUP_MEMBER WHERE GROUP_ID = :group_id AND USER_ID = :user_id",
             nativeQuery = true
     )
     fun findByUserAndGroup(@Param("user_id") user_id: Long, @Param("group_id") group_id: Long): Optional<GroupMember>

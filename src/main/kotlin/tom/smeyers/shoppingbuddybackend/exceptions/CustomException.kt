@@ -1,4 +1,4 @@
-package tom.smeyers.shoppingbuddybackend
+package tom.smeyers.shoppingbuddybackend.exceptions
 
 import org.springframework.http.HttpStatus
 

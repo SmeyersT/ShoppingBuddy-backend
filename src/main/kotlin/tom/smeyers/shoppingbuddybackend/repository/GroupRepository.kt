@@ -1,5 +1,6 @@
 package tom.smeyers.shoppingbuddybackend.repository
 
+import com.google.api.client.util.Value
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
@@ -8,8 +9,9 @@ import tom.smeyers.shoppingbuddybackend.model.domain.Group
 
 @Repository
 interface GroupRepository : JpaRepository<Group, Long> {
+
     @Query(
-            value = "SELECT * FROM GROUPS WHERE UPPER(NAME) LIKE CONCAT('%', :searchInput, '%')",
+            value = "SELECT * FROM shoppingbuddy.GROUPS WHERE UPPER(NAME) LIKE CONCAT('%', :searchInput, '%')",
             nativeQuery = true
     )
     fun findByName(@Param("searchInput") searchInput: String): MutableList<Group>

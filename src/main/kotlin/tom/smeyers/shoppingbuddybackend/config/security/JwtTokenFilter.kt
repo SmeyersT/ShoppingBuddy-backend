@@ -3,8 +3,7 @@ package tom.smeyers.shoppingbuddybackend.config.security
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.util.AntPathMatcher
 import org.springframework.web.filter.OncePerRequestFilter
-import tom.smeyers.shoppingbuddybackend.CustomException
-import tom.smeyers.shoppingbuddybackend.config.security.JwtTokenProvider
+import tom.smeyers.shoppingbuddybackend.exceptions.CustomException
 import java.io.IOException
 import javax.servlet.FilterChain
 import javax.servlet.ServletException
@@ -13,7 +12,7 @@ import javax.servlet.http.HttpServletResponse
 
 class JwtTokenFilter(private val jwtTokenProvider: JwtTokenProvider) : OncePerRequestFilter() {
 
-    private val skipUrls: Set<String> = HashSet(listOf("/h2-console/**", "/", "/api/login/**"))
+    private val skipUrls: Set<String> = HashSet(listOf("/h2-console", "/h2-console/**", "/", "/api/login/**"))
     private val pathMatcher = AntPathMatcher()
 
     @Throws(ServletException::class, IOException::class)

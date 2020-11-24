@@ -9,8 +9,7 @@ data class ShoppingCart(
         @GeneratedValue
         var id: Long = 0,
         var isRepeating: Boolean,
-        var addedOn: LocalDateTime,
-        @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+        @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
         @JoinColumn(name = "shopping_cart_id")
         var items: MutableList<ShoppingCartItem> = mutableListOf<ShoppingCartItem>(),
         var isPersonalCart: Boolean

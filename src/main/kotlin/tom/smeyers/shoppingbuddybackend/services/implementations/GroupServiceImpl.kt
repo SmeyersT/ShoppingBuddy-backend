@@ -4,16 +4,14 @@ import javassist.NotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
-import tom.smeyers.shoppingbuddybackend.CustomException
+import tom.smeyers.shoppingbuddybackend.exceptions.CustomException
 import tom.smeyers.shoppingbuddybackend.model.domain.Group
-import tom.smeyers.shoppingbuddybackend.model.domain.GroupMember
 import tom.smeyers.shoppingbuddybackend.model.domain.GroupRole
 import tom.smeyers.shoppingbuddybackend.model.domain.User
 import tom.smeyers.shoppingbuddybackend.repository.GroupRepository
 import tom.smeyers.shoppingbuddybackend.services.interfaces.GroupMemberService
 import tom.smeyers.shoppingbuddybackend.services.interfaces.GroupService
 import tom.smeyers.shoppingbuddybackend.services.interfaces.ShoppingCartService
-import tom.smeyers.shoppingbuddybackend.services.interfaces.UserService
 import javax.transaction.Transactional
 
 @Transactional
@@ -29,13 +27,11 @@ class GroupServiceImpl : GroupService {
     @Autowired
     private lateinit var shoppingCartService: ShoppingCartService
 
-    @Autowired
-    private lateinit var userService: UserService
-
     override fun save(group: Group): Group {
         return groupRepo.save(group)
     }
 
+    @Throws(NotFoundException::class, CustomException::class)
     override fun deleteGroup(group: Group, user: User) {
         try {
             val toDeleteGroup = findGroupById(group.id)
@@ -63,10 +59,6 @@ class GroupServiceImpl : GroupService {
             group.get()
         }
         else throw NotFoundException("No group found with id: $id.")
-    }
-
-    override fun getAllGroups(): MutableList<Group> {
-        return groupRepo.findAll()
     }
 
     override fun getGroupsByUser(user: User): MutableList<Group?> {

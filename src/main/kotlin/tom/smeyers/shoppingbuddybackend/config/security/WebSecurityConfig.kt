@@ -33,7 +33,9 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         http.authorizeRequests()
                 .antMatchers("/api/login/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
-                //.antMatchers("/api/**").authenticated()
+                .antMatchers("/app/**").authenticated()
+                .antMatchers("/topic/**").authenticated()
+                .antMatchers("/socket/**").authenticated()
                 .anyRequest().authenticated()
 
         http.formLogin().disable()

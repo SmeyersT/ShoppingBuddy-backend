@@ -17,5 +17,6 @@ data class Group(
         var groupMembers: MutableList<GroupMember> = mutableListOf<GroupMember>(),
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(referencedColumnName = "id")
-        var shoppingCart: ShoppingCart = ShoppingCart(0, false, LocalDateTime.now(), mutableListOf<ShoppingCartItem>(), isPersonalCart = false)
+        var shoppingCart: ShoppingCart = ShoppingCart(0, false,
+                mutableListOf<ShoppingCartItem>(), isPersonalCart = false)
 )

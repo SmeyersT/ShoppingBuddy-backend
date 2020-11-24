@@ -1,12 +1,13 @@
 package tom.smeyers.shoppingbuddybackend.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import javassist.NotFoundException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import tom.smeyers.shoppingbuddybackend.exceptions.CustomException
 import tom.smeyers.shoppingbuddybackend.model.domain.Group
 import tom.smeyers.shoppingbuddybackend.model.dto.GroupDTO
 import tom.smeyers.shoppingbuddybackend.services.interfaces.GroupService
@@ -30,9 +31,13 @@ class GroupController {
     @GetMapping("/getGroup")
     fun getGroupById(@RequestHeader("Authorization") authHeader: String, @RequestBody id: Long): ResponseEntity<GroupDTO> {
         logger.info("getGroup method called.")
-        val group = groupService.findGroupById(id)
-        val groupDto = objectMapper.convertValue(group, GroupDTO::class.java)
-        return ResponseEntity.ok(groupDto)
+        return try {
+            val group = groupService.findGroupById(id)
+            val groupDto = objectMapper.convertValue(group, GroupDTO::class.java)
+            ResponseEntity.ok(groupDto)
+        } catch (nfe : NotFoundException) {
+            ResponseEntity.notFound().build<GroupDTO>()
+        }
     }
 
     @PostMapping("/createNewGroup")
@@ -46,10 +51,17 @@ class GroupController {
     @PostMapping("/deleteGroup")
     fun deleteGroup(@RequestHeader("Authorization") authHeader: String, @RequestBody groupDto: GroupDTO): ResponseEntity<GroupDTO> {
         logger.info("deleteGroup method called.")
-        val group = objectMapper.convertValue(groupDto, Group::class.java)
-        val user = userService.getCurrentUser(authHeader.substring(7))
-        groupService.deleteGroup(group, user)
-        return ResponseEntity.ok(groupDto)
+        return try {
+            val group = objectMapper.convertValue(groupDto, Group::class.java)
+            val user = userService.getCurrentUser(authHeader.substring(7))
+            groupService.deleteGroup(group, user)
+            return ResponseEntity.ok(groupDto)
+        } catch (ce: CustomException) {
+            ResponseEntity.badRequest().build<GroupDTO>()
+        } catch (nfe: NotFoundException) {
+            ResponseEntity.notFound().build<GroupDTO>()
+        }
+
     }
 
 

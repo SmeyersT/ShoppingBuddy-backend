@@ -16,5 +16,5 @@ data class User(
         var imgUrl: String,
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(referencedColumnName = "id", unique = true)
-        var personalShoppingCart: ShoppingCart = ShoppingCart(0, false, LocalDateTime.now(), mutableListOf<ShoppingCartItem>(), true)
+        var personalShoppingCart: ShoppingCart = ShoppingCart(0, false, mutableListOf<ShoppingCartItem>(), true)
 )

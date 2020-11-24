@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
-import tom.smeyers.shoppingbuddybackend.CustomException
+import tom.smeyers.shoppingbuddybackend.exceptions.CustomException
 import tom.smeyers.shoppingbuddybackend.config.security.SecurityConstants.EXPIRATION_TIME
 import tom.smeyers.shoppingbuddybackend.config.security.SecurityConstants.HEADER_STRING
 import tom.smeyers.shoppingbuddybackend.config.security.SecurityConstants.TOKEN_PREFIX
